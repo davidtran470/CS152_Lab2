@@ -4,6 +4,7 @@ module Traffic_Light_Controller(
     input clk,
     input walk_button,
     input sensor,
+	 input rst,
     output reg main_green,
     output reg main_yellow,
     output reg main_red,
@@ -28,11 +29,17 @@ reg [3:0] counter = 0;
 reg walk_reg = 0;
 
 // Counter: For now assume one cycle of clk is 1 second
-always @(posedge clk) begin
-	counter <= counter + 1;
-	if (curr_state != next_state) begin
-		curr_state <= next_state;
+always @(posedge clk or rst) begin
+	if (rst) begin
+		curr_state <= MAIN_GREEN;
 		counter <= 0;
+	end
+	else begin
+		counter <= counter + 1;
+		if (curr_state != next_state) begin
+			curr_state <= next_state;
+			counter <= 0;
+		end
 	end
 end
 
@@ -47,15 +54,15 @@ end
 always @(*) begin
     case (curr_state)
         MAIN_GREEN: begin
-            if (counter == 11 && sensor) 
+            if (counter == 5 && sensor) 
                 next_state <= MAIN_STAY_GREEN;
-            else if (counter == 11 && ~sensor)
+            else if (counter == 11)
                 next_state <= MAIN_YELLOW;
             else 
                 next_state <= MAIN_GREEN;
         end
         MAIN_STAY_GREEN: begin
-            if (counter == 3)
+            if (counter == 2)
                 next_state <= MAIN_YELLOW;
             else 
                 next_state <= MAIN_STAY_GREEN;

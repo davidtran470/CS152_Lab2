@@ -5,6 +5,7 @@ module Traffic_Light_Controller_tb;
 	reg clk;
 	reg walk_button;
 	reg sensor;
+	reg rst;
 	
 	//outputs
 	wire main_green;
@@ -19,6 +20,7 @@ module Traffic_Light_Controller_tb;
 		.clk(clk),
 		.walk_button(walk_button),
 		.sensor(sensor),
+		.rst(rst),
 		.main_green(main_green),
 		.main_yellow(main_yellow),
 		.main_red(main_red),
@@ -35,7 +37,7 @@ module Traffic_Light_Controller_tb;
 		clk = 0;
 		walk_button = 0;
 		sensor = 0;
-		#33000
+		#27000
 
 		//introduce inputs
 		walk_button = 1;
@@ -61,5 +63,9 @@ module Traffic_Light_Controller_tb;
 
 		//back to normal
 		walk_button = 0;
+		#15000
+		rst = 1;
+		#1000
+		rst = 0;
 	end
 endmodule
