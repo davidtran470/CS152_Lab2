@@ -1,4 +1,4 @@
-`timescale 1s / 1ms
+`timescale 1ms / 1ms
 
 module Traffic_Light_Controller_tb;
 	//inputs
@@ -28,38 +28,38 @@ module Traffic_Light_Controller_tb;
 		.walk_lamp(walk_lamp)
 	);
 
-	always #0.5 clk = ~clk;
+	always #500 clk = ~clk;
 
 	initial begin
 		//let run for regular cycle with initial inputs
+		clk = 0;
 		walk_button = 0;
 		sensor = 0;
-		#33
+		#33000
 
 		//introduce inputs
 		walk_button = 1;
 		sensor = 1;
-		#2
+		#2000
 		
 		//set back to normal
 		walk_button = 0;
 		sensor = 0;
-		#9
+		#12000
 
 		//set sensor = 1
 		sensor = 1;
-		#2
+		#2000
 
 		//set sensor = 0
 		sensor = 0;
-		#5
+		#5000
 
 		//set walk_button = 1
 		walk_button = 1;
-		#2
+		#2000
 
 		//back to normal
 		walk_button = 0;
-		#5
 	end
 endmodule
