@@ -1,0 +1,18 @@
+//Clock 
+NET "clk"   LOC = V10 | IOSTANDARD = LVCMOS33;
+
+//LEDs
+NET "main_green"    LOC = U16 | IOSTANDARD = LVCMOS33;
+NET "main_yellow"   LOC = V16 | IOSTANDARD = LVCMOS33;
+NET "main_red"      LOC = U15 | IOSTANDARD = LVCMOS33;
+NET "walk_lamp"     LOC = V15 | IOSTANDARD = LVCMOS33;
+NET "side_green"    LOC = N11 | IOSTANDARD = LVCMOS33;
+NET "side_yellow"   LOC = R11 | IOSTANDARD = LVCMOS33;
+NET "side_red"      LOC = T11 | IOSTANDARD = LVCMOS33;
+
+//Swtiches
+NET "walk_button"   LOC = B8 | IOSTANDARD = LVCMOS33;
+NET "rst"           LOC = T10 | IOSTANDARD = LVCMOS33;
+
+//Button
+NET "sensor"        LOC = V9 | IOSTANDARD = LVCMOS33;
